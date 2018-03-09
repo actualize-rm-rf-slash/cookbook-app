@@ -18,12 +18,15 @@ elsif input_option == "2"
   recipe = response.body
   puts JSON.pretty_generate(recipe)
 elsif input_option == "3"
-  params = {
-    "input_title" => "Apple pie",
-    "input_chef" => "Peter Jang",
-    "input_ingredients" => "Apple, cherries",
-    "input_directions" => "Don't use the cherries."
-  }
+  params = {}
+  print "Title: "
+  params["input_title"] = gets.chomp
+  print "Chef: "
+  params["input_chef"] = gets.chomp
+  print "Ingredients: "
+  params["input_ingredients"] = gets.chomp
+  print "Directions: "
+  params["input_directions"] = gets.chomp
   response = Unirest.post("http://localhost:3000/v1/recipes", parameters: params)
   recipe = response.body
   puts JSON.pretty_generate(recipe)
