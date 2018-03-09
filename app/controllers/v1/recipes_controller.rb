@@ -12,10 +12,10 @@ class V1::RecipesController < ApplicationController
 
   def create
     recipe = Recipe.new(
-      title: "Mud Pie",
-      chef: "Peter Jang",
-      ingredients: "Mud",
-      directions: "Bake the mud. Enjoy!"
+      title: params["input_title"],
+      chef: params["input_chef"],
+      ingredients: params["input_ingredients"],
+      directions: params["input_directions"]
     )
     recipe.save
     render json: recipe.as_json
