@@ -1,4 +1,4 @@
-class RecipesController < ApplicationController
+class V1::RecipesController < ApplicationController
   def one_recipe_method
     recipe = Recipe.first
     render json: {
