@@ -4,13 +4,9 @@ class V1::RecipesController < ApplicationController
     render json: recipes.as_json
   end
 
-  def one_recipe_method
-    recipe = Recipe.first
-    render json: {
-      title: recipe.title,
-      chef: recipe.chef,
-      ingredients: recipe.ingredients,
-      directions: recipe.directions
-    }
+  def show
+    recipe_id = params["id"]
+    recipe = Recipe.find_by(id: recipe_id)
+    render json: recipe.as_json
   end
 end
