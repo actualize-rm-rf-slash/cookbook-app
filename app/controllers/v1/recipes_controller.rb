@@ -9,4 +9,15 @@ class V1::RecipesController < ApplicationController
     recipe = Recipe.find_by(id: recipe_id)
     render json: recipe.as_json
   end
+
+  def create
+    recipe = Recipe.new(
+      title: "Mud Pie",
+      chef: "Peter Jang",
+      ingredients: "Mud",
+      directions: "Bake the mud. Enjoy!"
+    )
+    recipe.save
+    render json: recipe.as_json
+  end
 end
