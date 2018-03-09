@@ -4,12 +4,6 @@ class V1::RecipesController < ApplicationController
     render json: recipes.as_json
   end
 
-  def show
-    recipe_id = params["id"]
-    recipe = Recipe.find_by(id: recipe_id)
-    render json: recipe.as_json
-  end
-
   def create
     recipe = Recipe.new(
       title: params["input_title"],
@@ -18,6 +12,12 @@ class V1::RecipesController < ApplicationController
       directions: params["input_directions"]
     )
     recipe.save
+    render json: recipe.as_json
+  end
+
+  def show
+    recipe_id = params["id"]
+    recipe = Recipe.find_by(id: recipe_id)
     render json: recipe.as_json
   end
 end
