@@ -6,6 +6,7 @@ puts "[1] See all recipes"
 puts "[2] See one recipe"
 puts "[3] Create a recipe"
 puts "[4] Update a recipe"
+puts "[5] Delete a recipe"
 
 input_option = gets.chomp
 if input_option == "1"
@@ -49,4 +50,10 @@ elsif input_option == "4"
   response = Unirest.patch("http://localhost:3000/v1/recipes/#{recipe_id}", parameters: params)
   recipe = response.body
   puts JSON.pretty_generate(recipe)
+elsif input_option == "5"
+  print "Enter a recipe id: "
+  recipe_id = gets.chomp
+  response = Unirest.delete("http://localhost:3000/v1/recipes/#{recipe_id}")
+  body = response.body
+  puts JSON.pretty_generate(body)
 end
