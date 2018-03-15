@@ -3,6 +3,7 @@ require "unirest"
 system "clear"
 puts "Welcome to Recipe app! Choose an option:"
 puts "[1] See all recipes"
+puts "  [1.1] Search recipes that have the letter s"
 puts "[2] See one recipe"
 puts "[3] Create a recipe"
 puts "[4] Update a recipe"
@@ -11,6 +12,10 @@ puts "[5] Delete a recipe"
 input_option = gets.chomp
 if input_option == "1"
   response = Unirest.get("http://localhost:3000/v1/recipes")
+  recipes = response.body
+  puts JSON.pretty_generate(recipes)
+elsif input_option == "1.1"
+  response = Unirest.get("http://localhost:3000/v1/recipes?input_search_terms=s")
   recipes = response.body
   puts JSON.pretty_generate(recipes)
 elsif input_option == "2"
