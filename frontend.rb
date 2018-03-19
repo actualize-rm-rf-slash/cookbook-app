@@ -8,6 +8,7 @@ puts "[2] See one recipe"
 puts "[3] Create a recipe"
 puts "[4] Update a recipe"
 puts "[5] Delete a recipe"
+puts "[signup] Signup (create a user)"
 
 input_option = gets.chomp
 if input_option == "1"
@@ -61,4 +62,13 @@ elsif input_option == "5"
   response = Unirest.delete("http://localhost:3000/v1/recipes/#{recipe_id}")
   body = response.body
   puts JSON.pretty_generate(body)
+elsif input_option == "signup"
+  params = {
+    name: "Peter",
+    email: "peter@email.com",
+    password: "password",
+    password_confirmation: "password"
+  }
+  response = Unirest.post("http://localhost:3000/v1/users", parameters: params)
+  p response.body
 end
