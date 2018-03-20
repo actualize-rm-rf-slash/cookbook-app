@@ -1,13 +1,19 @@
 class V1::RecipesController < ApplicationController
   def index
-    recipes = Recipe.all.order(:id => :asc)
+    if current_user
+      # recipes = Recipe.all.order(:id => :asc)
+      # recipes = only the current users's recipes
+      recipes = current_user.recipes.order(:id => :asc)
 
-    search_terms = params["input_search_terms"]
-    if search_terms
-      recipes = recipes.where("title ILIKE ?", "%#{search_terms}%")
+      search_terms = params["input_search_terms"]
+      if search_terms
+        recipes = recipes.where("title ILIKE ?", "%#{search_terms}%")
+      end
+
+      render json: recipes.as_json
+    else
+      render json: []
     end
-
-    render json: recipes.as_json
   end
 
   def create
