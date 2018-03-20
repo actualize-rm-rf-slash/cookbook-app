@@ -1,21 +1,41 @@
 require "unirest"
 
-# Login and set jwt as part of Unirest requests
-response = Unirest.post(
-  "http://localhost:3000/user_token",
-  parameters: {
-    auth: {
-      email: "peter@email.com",
-      password: "password"
-    }
+
+system "clear"
+puts "Welcome to Recipe app! Choose an option:"
+puts "[signup] Signup (create a user)"
+puts "[login] Login (create a JSON web token)"
+puts "[logout] Logout (delete the JSON web token)"
+
+input_option = gets.chomp
+if input_option == "signup"
+  params = {
+    name: "Test",
+    email: "test@email.com",
+    password: "password",
+    password_confirmation: "password"
   }
-)
-jwt = response.body["jwt"]
-Unirest.default_header("Authorization", "Bearer #{jwt}")
+  response = Unirest.post("http://localhost:3000/v1/users", parameters: params)
+  p response.body
+elsif input_option == "login"
+  response = Unirest.post(
+    "http://localhost:3000/user_token",
+    parameters: {
+      auth: {
+        email: "test@email.com",
+        password: "password"
+      }
+    }
+  )
+  jwt = response.body["jwt"]
+  Unirest.default_header("Authorization", "Bearer #{jwt}")
+elsif input_option == "logout"
+  jwt = ""
+  Unirest.clear_default_headers()
+end
 
 
 system "clear"
-puts "Your jwt is #{jwt}"
 puts "Welcome to Recipe app! Choose an option:"
 puts "[1] See all recipes"
 puts "  [1.1] Search recipes that have the letter s"
@@ -23,7 +43,6 @@ puts "[2] See one recipe"
 puts "[3] Create a recipe"
 puts "[4] Update a recipe"
 puts "[5] Delete a recipe"
-puts "[signup] Signup (create a user)"
 
 input_option = gets.chomp
 if input_option == "1"
@@ -77,13 +96,4 @@ elsif input_option == "5"
   response = Unirest.delete("http://localhost:3000/v1/recipes/#{recipe_id}")
   body = response.body
   puts JSON.pretty_generate(body)
-elsif input_option == "signup"
-  params = {
-    name: "Peter",
-    email: "peter@email.com",
-    password: "password",
-    password_confirmation: "password"
-  }
-  response = Unirest.post("http://localhost:3000/v1/users", parameters: params)
-  p response.body
 end
