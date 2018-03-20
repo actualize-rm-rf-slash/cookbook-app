@@ -1,6 +1,21 @@
 require "unirest"
 
+# Login and set jwt as part of Unirest requests
+response = Unirest.post(
+  "http://localhost:3000/user_token",
+  parameters: {
+    auth: {
+      email: "peter@email.com",
+      password: "password"
+    }
+  }
+)
+jwt = response.body["jwt"]
+Unirest.default_header("Authorization", "Bearer #{jwt}")
+
+
 system "clear"
+puts "Your jwt is #{jwt}"
 puts "Welcome to Recipe app! Choose an option:"
 puts "[1] See all recipes"
 puts "  [1.1] Search recipes that have the letter s"
