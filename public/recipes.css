@@ -1,0 +1,9 @@
+body {
+  font-family: Futura, "Trebuchet MS", Arial, sans-serif;
+  background-image: url("retina_wood.png");
+}
+
+.navbar-brand {
+  font-family: "Bungee Outline", cursive;
+  font-size: 3em;
+}
