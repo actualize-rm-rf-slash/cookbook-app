@@ -10,7 +10,7 @@ axios.get("http://localhost:3000/v1/recipes").then(function(response) {
 
   recipes.forEach(function(recipe) {
     var recipeClone = recipeTemplate.content.cloneNode(true);
-    recipeClone.querySelector("card-title").innerText = recipe.title;
+    recipeClone.querySelector(".card-title").innerText = recipe.title;
     recipeClone.querySelector(".ingredients").innerText = recipe.ingredients;
     recipeClone.querySelector(".directions").innerText = recipe.directions;
     recipeClone.querySelector(".card-img-top").src = recipe.image;
