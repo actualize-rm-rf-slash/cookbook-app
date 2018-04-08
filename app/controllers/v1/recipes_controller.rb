@@ -1,6 +1,9 @@
 class V1::RecipesController < ApplicationController
   def index
-    if current_user
+    if true
+      recipes = Recipe.all
+      render json: recipes.as_json
+    elsif current_user
       # recipes = Recipe.all.order(:id => :asc)
       # recipes = only the current users's recipes
       recipes = current_user.recipes.order(:id => :asc)
