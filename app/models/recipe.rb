@@ -27,6 +27,7 @@ class Recipe < ApplicationRecord
       id: id,
       title: title,
       chef: chef,
+      image: image_url,
       ingredients: ingredients_list,
       directions: directions_list,
       created_at: friendly_created_at,
