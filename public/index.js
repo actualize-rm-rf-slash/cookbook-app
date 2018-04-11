@@ -4,7 +4,7 @@ var recipeTemplate = document.querySelector("#recipe-card");
 var recipeContainer = document.querySelector(".row");
 
 // IN RUBY: response = Unirest.get("http://localhost:3000/v1/recipes")
-axios.get("http://localhost:3000/v1/recipes").then(function(response) {
+axios.get("/v1/recipes").then(function(response) {
   var recipes = response.data;
   console.log(recipes);
 
