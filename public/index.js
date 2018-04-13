@@ -1,19 +1,32 @@
-/* global axios */
+/* global Vue, VueRouter, axios */
 
-var recipeTemplate = document.querySelector("#recipe-card");
-var recipeContainer = document.querySelector(".row");
+var HomePage = {
+  template: "#home-page",
+  data: function() {
+    return {
+      message: "Welcome to Vue.js!",
+      recipes: []
+    };
+  },
+  created: function() {
+    axios.get("/v1/recipes").then(
+      function(response) {
+        this.recipes = response.data;
+      }.bind(this)
+    );
+  },
+  methods: {},
+  computed: {}
+};
 
-// IN RUBY: response = Unirest.get("http://localhost:3000/v1/recipes")
-axios.get("/v1/recipes").then(function(response) {
-  var recipes = response.data;
-  console.log(recipes);
+var router = new VueRouter({
+  routes: [{ path: "/", component: HomePage }],
+  scrollBehavior: function(to, from, savedPosition) {
+    return { x: 0, y: 0 };
+  }
+});
 
-  recipes.forEach(function(recipe) {
-    var recipeClone = recipeTemplate.content.cloneNode(true);
-    recipeClone.querySelector(".card-title").innerText = recipe.title;
-    recipeClone.querySelector(".ingredients").innerText = recipe.ingredients;
-    recipeClone.querySelector(".directions").innerText = recipe.directions;
-    recipeClone.querySelector(".card-img-top").src = recipe.image;
-    recipeContainer.appendChild(recipeClone);
-  });
+var app = new Vue({
+  el: "#vue-app",
+  router: router
 });
