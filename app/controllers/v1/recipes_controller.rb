@@ -24,7 +24,8 @@ class V1::RecipesController < ApplicationController
       title: params["input_title"],
       chef: params["input_chef"],
       ingredients: params["input_ingredients"],
-      directions: params["input_directions"]
+      directions: params["input_directions"],
+      prep_time: 100
     )
     recipe.save
     render json: recipe.as_json

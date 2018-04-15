@@ -97,6 +97,39 @@ var LoginPage = {
   }
 };
 
+var RecipesNewPage = {
+  template: "#recipes-new-page",
+  data: function() {
+    return {
+      title: "",
+      chef: "",
+      ingredients: "",
+      directions: "",
+      errors: []
+    };
+  },
+  methods: {
+    submit: function() {
+      var params = {
+        input_title: this.title,
+        input_chef: this.chef,
+        input_ingredients: this.ingredients,
+        input_directions: this.directions
+      };
+      axios
+        .post("/v1/recipes", params)
+        .then(function(response) {
+          router.push("/");
+        })
+        .catch(
+          function(error) {
+            this.errors = error.response.data.errors;
+          }.bind(this)
+        );
+    }
+  }
+};
+
 var LogoutPage = {
   template: "<h1>Logout</h1>",
   created: function() {
@@ -112,7 +145,8 @@ var router = new VueRouter({
     { path: "/sample", component: SamplePage },
     { path: "/signup", component: SignupPage },
     { path: "/login", component: LoginPage },
-    { path: "/logout", component: LogoutPage }
+    { path: "/logout", component: LogoutPage },
+    { path: "/recipes/new", component: RecipesNewPage }
   ],
   scrollBehavior: function(to, from, savedPosition) {
     return { x: 0, y: 0 };

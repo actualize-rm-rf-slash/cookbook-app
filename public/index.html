@@ -161,3 +161,33 @@
 
   </div>
 </template>
+
+<template id="recipes-new-page">
+  <div class="vue-component">
+
+    <div class="container">
+      <h1>New Recipe</h1>
+      <ul>
+        <li class="text-danger" v-for="error in errors">{{ error }}</li>
+      </ul>
+      <div class="form-group">
+        <label>Title:</label>
+        <input type="text" class="form-control" v-model="title">
+      </div>
+      <div class="form-group">
+        <label>Chef:</label>
+        <input type="text" class="form-control" v-model="chef">
+      </div>
+      <div class="form-group">
+        <label>Ingredients:</label>
+        <input type="text" class="form-control" v-model="ingredients">
+      </div>
+      <div class="form-group">
+        <label>Directions:</label>
+        <input type="text" class="form-control" v-model="directions">
+      </div>
+      <button class="btn btn-primary" v-on:click="submit()">Submit</button>
+    </div>
+
+  </div>
+</template>
