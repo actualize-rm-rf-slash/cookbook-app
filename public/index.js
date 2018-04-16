@@ -5,7 +5,11 @@ var HomePage = {
   data: function() {
     return {
       message: "Welcome to Vue.js!",
-      recipes: []
+      recipes: [],
+      currentRecipe: {
+        title: "title goes here",
+        ingredients: "ingredients goes here"
+      }
     };
   },
   created: function() {
@@ -15,7 +19,11 @@ var HomePage = {
       }.bind(this)
     );
   },
-  methods: {},
+  methods: {
+    setCurrentRecipe: function(inputRecipe) {
+      this.currentRecipe = inputRecipe;
+    }
+  },
   computed: {}
 };
 
