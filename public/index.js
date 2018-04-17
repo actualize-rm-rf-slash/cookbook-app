@@ -27,6 +27,29 @@ var HomePage = {
   computed: {}
 };
 
+var RecipesShowPage = {
+  template: "#recipes-show-page",
+  data: function() {
+    return {
+      recipe: {
+        title: "Title goes here",
+        ingredients: ["first ingredient", "second ingredient"],
+        directions: ["first direction", "second direction"]
+      }
+    };
+  },
+  created: function() {
+    console.log("what is this weird $route thing", this.$route);
+    axios.get("v1/recipes/" + this.$route.params.id).then(
+      function(response) {
+        this.recipe = response.data;
+      }.bind(this)
+    );
+  },
+  methods: {},
+  computed: {}
+};
+
 var SamplePage = {
   template: "#sample-page",
   data: function() {
@@ -154,7 +177,8 @@ var router = new VueRouter({
     { path: "/signup", component: SignupPage },
     { path: "/login", component: LoginPage },
     { path: "/logout", component: LogoutPage },
-    { path: "/recipes/new", component: RecipesNewPage }
+    { path: "/recipes/new", component: RecipesNewPage },
+    { path: "/recipes/:id", component: RecipesShowPage }
   ],
   scrollBehavior: function(to, from, savedPosition) {
     return { x: 0, y: 0 };
