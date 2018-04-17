@@ -6,6 +6,7 @@ var HomePage = {
     return {
       message: "Welcome to Vue.js!",
       recipes: [],
+      titleFilter: "",
       currentRecipe: {
         title: "title goes here",
         ingredients: "ingredients goes here"
@@ -22,6 +23,9 @@ var HomePage = {
   methods: {
     setCurrentRecipe: function(inputRecipe) {
       this.currentRecipe = inputRecipe;
+    },
+    isValidRecipe: function(inputRecipe) {
+      return inputRecipe.title.includes(this.titleFilter);
     }
   },
   computed: {}
