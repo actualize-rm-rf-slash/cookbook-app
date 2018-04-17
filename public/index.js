@@ -7,6 +7,7 @@ var HomePage = {
       message: "Welcome to Vue.js!",
       recipes: [],
       titleFilter: "",
+      chefFilter: "",
       currentRecipe: {
         title: "title goes here",
         ingredients: "ingredients goes here"
@@ -24,10 +25,21 @@ var HomePage = {
     setCurrentRecipe: function(inputRecipe) {
       this.currentRecipe = inputRecipe;
     },
-    isValidRecipe: function(inputRecipe) {
+    isValidRecipeTitle: function(inputRecipe) {
       var lowerInputTitle = inputRecipe.title.toLowerCase();
       var lowerTitleFilter = this.titleFilter.toLowerCase();
       return lowerInputTitle.includes(lowerTitleFilter);
+    },
+    isValidRecipeChef: function(inputRecipe) {
+      var lowerInputChef = inputRecipe.chef.toLowerCase();
+      var lowerChefFilter = this.chefFilter.toLowerCase();
+      return lowerInputChef.includes(lowerChefFilter);
+    },
+    isValidRecipe: function(inputRecipe) {
+      return (
+        this.isValidRecipeTitle(inputRecipe) &&
+        this.isValidRecipeChef(inputRecipe)
+      );
     }
   },
   computed: {}
