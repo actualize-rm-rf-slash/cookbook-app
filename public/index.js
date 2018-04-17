@@ -25,7 +25,9 @@ var HomePage = {
       this.currentRecipe = inputRecipe;
     },
     isValidRecipe: function(inputRecipe) {
-      return inputRecipe.title.includes(this.titleFilter);
+      var lowerInputTitle = inputRecipe.title.toLowerCase();
+      var lowerTitleFilter = this.titleFilter.toLowerCase();
+      return lowerInputTitle.includes(lowerTitleFilter);
     }
   },
   computed: {}
