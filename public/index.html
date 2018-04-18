@@ -81,7 +81,10 @@
     <a href="/#/sample">Go to a sample page</a>
     <h1>All recipes</h1>
       <!-- <input type="text" v-model="anythingFilter" placeholder="Search by anything"> -->
-      <input type="text" v-model="titleFilter" placeholder="Search by recipe title">
+      <input type="text" v-model="titleFilter" placeholder="Search by recipe title" list="recipe-titles">
+      <datalist id="recipe-titles">
+        <option v-for="recipe in recipes">{{ recipe.title }}</option>
+      </datalist>
       <input type="text" v-model="chefFilter" placeholder="Search by recipe chef">
       <div class="row">
         <!-- recipes go here -->
