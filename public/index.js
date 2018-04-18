@@ -10,6 +10,7 @@ var HomePage = {
       titleFilter: "",
       chefFilter: "",
       sortAttribute: "chef",
+      sortAscending: true,
       currentRecipe: {
         title: "title goes here",
         ingredients: "ingredients goes here"
@@ -42,7 +43,7 @@ var HomePage = {
         this.isValidRecipeTitle(inputRecipe) &&
         this.isValidRecipeChef(inputRecipe)
       );
-    }
+    },
     // isValidRecipe: function(inputRecipe) {
     //   // check if title matches
     //   var lowerInputTitle = inputRecipe.title.toLowerCase();
@@ -55,6 +56,10 @@ var HomePage = {
     //   // return true if either matches, false otherwise
     //   return titleMatches || chefMatches;
     // }
+    setSortAttribute: function(inputSortAttribute) {
+      this.sortAttribute = inputSortAttribute;
+      this.sortAscending = !this.sortAscending;
+    }
   },
   computed: {
     sortedRecipes: function() {
@@ -63,7 +68,13 @@ var HomePage = {
           // return recipe1.chef.localeCompare(recipe2.chef);
           var lowerAttribute1 = recipe1[this.sortAttribute].toLowerCase();
           var lowerAttribute2 = recipe2[this.sortAttribute].toLowerCase();
-          return lowerAttribute1.localeCompare(lowerAttribute2);
+          if (this.sortAscending) {
+            return lowerAttribute1.localeCompare(lowerAttribute2);
+          } else {
+            return lowerAttribute2.localeCompare(lowerAttribute1);
+          }
+
+          // return recipe1[this.sortAttribute] - recipe2[this.sortAttribute];
         }.bind(this)
       );
     }
