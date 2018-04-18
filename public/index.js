@@ -9,6 +9,7 @@ var HomePage = {
       // anythingFilter: "",
       titleFilter: "",
       chefFilter: "",
+      sortAttribute: "chef",
       currentRecipe: {
         title: "title goes here",
         ingredients: "ingredients goes here"
@@ -55,7 +56,18 @@ var HomePage = {
     //   return titleMatches || chefMatches;
     // }
   },
-  computed: {}
+  computed: {
+    sortedRecipes: function() {
+      return this.recipes.sort(
+        function(recipe1, recipe2) {
+          // return recipe1.chef.localeCompare(recipe2.chef);
+          var lowerAttribute1 = recipe1[this.sortAttribute].toLowerCase();
+          var lowerAttribute2 = recipe2[this.sortAttribute].toLowerCase();
+          return lowerAttribute1.localeCompare(lowerAttribute2);
+        }.bind(this)
+      );
+    }
+  }
 };
 
 var RecipesShowPage = {

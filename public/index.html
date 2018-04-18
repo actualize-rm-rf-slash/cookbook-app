@@ -86,10 +86,14 @@
         <option v-for="recipe in recipes">{{ recipe.title }}</option>
       </datalist>
       <input type="text" v-model="chefFilter" placeholder="Search by recipe chef">
+      <div>
+        <button class="btn btn-primary" v-on:click="sortAttribute = 'title'">Sort by title</button>
+        <button class="btn btn-primary" v-on:click="sortAttribute = 'chef'">Sort by chef</button>
+      </div>
       <div class="row" is="transition-group" name="fade">
         <!-- recipes go here -->
 
-        <div class="col-md-4" v-for="recipe in recipes" v-if="isValidRecipe(recipe)" v-bind:key="recipe.id">
+        <div class="col-md-4" v-for="recipe in sortedRecipes" v-if="isValidRecipe(recipe)" v-bind:key="recipe.id">
           <div class="card mb-5">
             <img class="card-img-top" v-bind:src="recipe.image" alt="Card image cap">
             <div class="card-body">
