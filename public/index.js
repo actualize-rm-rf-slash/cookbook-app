@@ -6,6 +6,7 @@ var HomePage = {
     return {
       message: "Welcome to Vue.js!",
       recipes: [],
+      // anythingFilter: "",
       titleFilter: "",
       chefFilter: "",
       currentRecipe: {
@@ -41,6 +42,18 @@ var HomePage = {
         this.isValidRecipeChef(inputRecipe)
       );
     }
+    // isValidRecipe: function(inputRecipe) {
+    //   // check if title matches
+    //   var lowerInputTitle = inputRecipe.title.toLowerCase();
+    //   var lowerTitleFilter = this.anythingFilter.toLowerCase();
+    //   var titleMatches = lowerInputTitle.includes(lowerTitleFilter);
+    //   // check if chef matches
+    //   var lowerInputChef = inputRecipe.chef.toLowerCase();
+    //   var lowerChefFilter = this.anythingFilter.toLowerCase();
+    //   var chefMatches = lowerInputChef.includes(lowerChefFilter);
+    //   // return true if either matches, false otherwise
+    //   return titleMatches || chefMatches;
+    // }
   },
   computed: {}
 };
